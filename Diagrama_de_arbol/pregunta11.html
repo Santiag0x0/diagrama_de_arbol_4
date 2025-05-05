@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pregunta 11 - Diagrama de Árbol</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+      max-width: 700px;
+      width: 100%;
+      backdrop-filter: blur(8px);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.9rem;
+      color: #00ffff;
+      text-shadow: 1px 1px 3px black;
+    }
+
+    .option {
+      background: linear-gradient(145deg, #2c3e50, #34495e);
+      border: 2px solid transparent;
+      padding: 1rem;
+      border-radius: 12px;
+      margin: 0.5rem 0;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .option:hover {
+      background: linear-gradient(145deg, #3d566e, #4b6584);
+    }
+
+    .option.correct {
+      background-color: #2ecc71 !important;
+      border-color: #27ae60;
+      box-shadow: 0 0 15px #2ecc71aa;
+    }
+
+    .option.incorrect {
+      background-color: #e74c3c !important;
+      border-color: #c0392b;
+      box-shadow: 0 0 15px #e74c3c99;
+    }
+
+    .symbol {
+      font-size: 1.5rem;
+      display: none;
+    }
+
+    .option.correct .symbol.show,
+    .option.incorrect .symbol.show {
+      display: inline;
+    }
+
+    .disabled {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .next-button {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: none;
+      margin-top: 1.5rem;
+      width: 100%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      transition: background 0.3s ease;
+    }
+
+    .next-button:hover {
+      background: linear-gradient(135deg, #2980b9, #2471a3);
+    }
+
+    .explanation {
+      margin-top: 1rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-left: 4px solid #00ffff;
+      border-radius: 8px;
+      display: none;
+      font-size: 1rem;
+      line-height: 1.5;
+      box-shadow: 0 0 10px rgba(0,255,255,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>¿Se pueden usar diagramas de árbol para decisiones estratégicas? ¿Por qué?</h2>
+
+    <div class="option" onclick="selectOption(this, false)">
+      No, porque solo sirven para representar datos estadísticos pasivos.
+      <span class="symbol">❌</span>
+    </div>
+
+    <div class="option" onclick="selectOption(this, true)">
+      Sí, porque permiten evaluar distintos escenarios y sus probabilidades para tomar decisiones informadas.
+      <span class="symbol">✅</span>
+    </div>
+
+    <div class="option" onclick="selectOption(this, false)">
+      Sí, pero únicamente si el evento tiene menos de dos resultados.
+      <span class="symbol">❌</span>
+    </div>
+
+    <div class="option" onclick="selectOption(this, false)">
+      No, porque no muestran probabilidades ni resultados posibles.
+      <span class="symbol">❌</span>
+    </div>
+
+    <div class="explanation" id="explanation"></div>
+
+    <button class="next-button" onclick="window.location.href='pregunta12.html'">Siguiente Pregunta</button>
+  </div>
+
+  <script>
+    let answered = false;
+    function selectOption(element, isCorrect) {
+      if (answered) return;
+      answered = true;
+      element.classList.add(isCorrect ? 'correct' : 'incorrect');
+      element.querySelector('.symbol').classList.add('show');
+      document.querySelectorAll('.option').forEach(opt => {
+        opt.classList.add('disabled');
+        if (opt !== element) opt.querySelector('.symbol').classList.add('show');
+      });
+      const explanation = document.getElementById('explanation');
+      if (isCorrect) {
+        explanation.innerText = "✅ ¡Correcto! Los diagramas de árbol permiten visualizar posibles escenarios y sus probabilidades, facilitando decisiones basadas en datos.";
+      } else {
+        explanation.innerText = "❌ Incorrecto. Los diagramas de árbol se usan para modelar diferentes escenarios y sus probabilidades, ayudando en decisiones estratégicas.";
+      }
+      explanation.style.display = 'block';
+      document.querySelector('.next-button').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

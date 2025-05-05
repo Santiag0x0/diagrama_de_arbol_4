@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Juego: Diagrama de Árbol</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(145deg, #1e3c72, #2a5298);
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px #00ffe0;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .start-button {
+      background: #00ffe0;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      color: #000;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .start-button:hover {
+      background: #00c2a8;
+      transform: scale(1.05);
+    }
+
+    /* Fondo de símbolos matemáticos */
+    .math-symbol {
+      position: absolute;
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.1);
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Símbolos matemáticos flotantes -->
+  <script>
+    const symbols = ['∑', 'π', '√', '≈', '≤', '≥', '≠', '∞', '→', '∫', 'P(A)', 'A ∩ B', 'B\'', '⋁', '⋀'];
+    for (let i = 0; i < 40; i++) {
+      const span = document.createElement('span');
+      span.className = 'math-symbol';
+      span.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      span.style.left = `${Math.random() * 100}%`;
+      span.style.animationDuration = `${5 + Math.random() * 10}s`;
+      span.style.fontSize = `${1 + Math.random() * 2}rem`;
+      document.body.appendChild(span);
+    }
+  </script>
+
+  <div class="container">
+    <h1>Juego: Diagrama de Árbol</h1>
+    <p>Explora probabilidades resolviendo preguntas visuales del diagrama de árbol.<br>¿Listo para jugar?</p>
+    <a href="temas.html">
+      <button class="start-button">Comenzar</button>
+    </a>
+  </div>
+</body>
+</html>

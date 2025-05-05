@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pregunta 8 - Diagrama de Árbol</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .container {
+      background-color: rgba(0,0,0,0.6);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+      max-width: 700px;
+      width: 100%;
+      backdrop-filter: blur(8px);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.9rem;
+      color: #00ffff;
+      text-shadow: 1px 1px 3px black;
+    }
+
+    .option {
+      background-color: #34495e;
+      border: 2px solid transparent;
+      padding: 1rem;
+      border-radius: 12px;
+      margin: 0.5rem 0;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .option:hover {
+      background-color: #3d566e;
+    }
+
+    .option.correct {
+      background-color: #2ecc71 !important;
+      border-color: #27ae60;
+      color: white;
+    }
+
+    .option.incorrect {
+      background-color: #e74c3c !important;
+      border-color: #c0392b;
+      color: white;
+    }
+
+    .symbol {
+      font-size: 1.5rem;
+      display: none;
+    }
+
+    .option.correct .symbol.show,
+    .option.incorrect .symbol.show {
+      display: inline;
+    }
+
+    .disabled {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .next-button {
+      background-color: #3498db;
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: none;
+      margin-top: 1.5rem;
+      width: 100%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    .next-button:hover {
+      background-color: #2980b9;
+    }
+
+    .explanation {
+      margin-top: 1rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 10px;
+      display: none;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>¿Para qué se multiplican las probabilidades en los caminos del diagrama?</h2>
+
+    <div class="option" onclick="selectOption(this, false)">
+      Para ajustar las probabilidades a valores mayores que 1.
+      <span class="symbol">❌</span>
+    </div>
+
+    <div class="option" onclick="selectOption(this, false)">
+      Para comparar las probabilidades de diferentes ramas.
+      <span class="symbol">❌</span>
+    </div>
+
+    <div class="option" onclick="selectOption(this, false)">
+      Para encontrar la suma total de todas las probabilidades.
+      <span class="symbol">❌</span>
+    </div>
+
+    <div class="option" onclick="selectOption(this, true)">
+      Para obtener la probabilidad del camino completo (suceso compuesto).
+      <span class="symbol">✅</span>
+    </div>
+
+    <div class="explanation" id="explanation"></div>
+
+    <button class="next-button" onclick="window.location.href='pregunta9.html'">Siguiente Pregunta</button>
+  </div>
+
+  <script>
+    let answered = false;
+
+    function selectOption(element, isCorrect) {
+      if (answered) return;
+
+      answered = true;
+      element.classList.add(isCorrect ? "correct" : "incorrect");
+      element.querySelector(".symbol").classList.add("show");
+
+      document.querySelectorAll('.option').forEach(opt => {
+        opt.classList.add('disabled');
+        if (opt !== element) {
+          opt.querySelector(".symbol").classList.add("show");
+        }
+      });
+
+      const explanation = document.getElementById("explanation");
+      if (isCorrect) {
+        explanation.innerText = "✅ ¡Correcto! Se multiplican para calcular la probabilidad de un suceso compuesto, es decir, un camino completo en el árbol.";
+      } else {
+        explanation.innerText = "❌ Incorrecto. En un diagrama de árbol, se multiplican las probabilidades de cada paso para obtener la probabilidad del recorrido completo.";
+      }
+      explanation.style.display = "block";
+
+      document.querySelector('.next-button').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

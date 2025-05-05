@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pregunta 1 - Diagrama de Árbol</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(6px);
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+      max-width: 750px;
+      width: 100%;
+      border: 2px solid rgba(0, 255, 255, 0.2);
+      animation: fadeIn 1s ease;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      color: #00ffff;
+      text-shadow: 0 0 5px #00ffff;
+    }
+
+    .option {
+      background-color: #1e2a38;
+      border: 2px solid transparent;
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      margin: 0.7rem 0;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0,255,255,0.05);
+    }
+
+    .option:hover {
+      background-color: #22384a;
+      box-shadow: 0 0 15px rgba(0,255,255,0.2);
+    }
+
+    .option.correct {
+      background-color: #27ae60 !important;
+      border-color: #2ecc71;
+      box-shadow: 0 0 15px #2ecc71aa;
+    }
+
+    .option.incorrect {
+      background-color: #c0392b !important;
+      border-color: #e74c3c;
+      box-shadow: 0 0 15px #e74c3c99;
+    }
+
+    .symbol {
+      font-size: 1.5rem;
+      display: none;
+    }
+
+    .option.correct .symbol.show,
+    .option.incorrect .symbol.show {
+      display: inline;
+    }
+
+    .disabled {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .next-button {
+      background-color: #00bcd4;
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: none;
+      margin-top: 2rem;
+      width: 100%;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 0 12px rgba(0,188,212,0.4);
+    }
+
+    .next-button:hover {
+      background-color: #0097a7;
+    }
+
+    .explanation {
+      margin-top: 1.2rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 1rem 1.2rem;
+      border-left: 4px solid #00ffff;
+      border-radius: 8px;
+      display: none;
+      font-size: 1rem;
+      line-height: 1.5;
+      box-shadow: 0 0 10px rgba(0,255,255,0.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>¿Para qué sirve un diagrama de árbol?</h2>
+
+    <div class="option" onclick="selectOption(this, true)">
+      Enumerar todos los caminos posibles de un experimento.
+      <span class="symbol">✅</span>
+    </div>
+    <div class="option" onclick="selectOption(this, false)">
+      Dibujar árboles genealógicos.
+      <span class="symbol">❌</span>
+    </div>
+    <div class="option" onclick="selectOption(this, false)">
+      Reemplazar operaciones aritméticas.
+      <span class="symbol">❌</span>
+    </div>
+    <div class="option" onclick="selectOption(this, false)">
+      Determinar la velocidad de una partícula.
+      <span class="symbol">❌</span>
+    </div>
+
+    <div class="explanation" id="explanation"></div>
+
+    <button class="next-button" onclick="window.location.href='pregunta2.html'">Siguiente Pregunta</button>
+  </div>
+
+  <script>
+    let answered = false;
+
+    function selectOption(element, isCorrect) {
+      if (answered) return;
+      answered = true;
+
+      const explanationDiv = document.getElementById('explanation');
+
+      // Marcar respuesta seleccionada
+      element.classList.add(isCorrect ? "correct" : "incorrect");
+      element.querySelector(".symbol").classList.add("show");
+
+      // Marcar y desactivar todas las opciones
+      const allOptions = document.querySelectorAll(".option");
+      allOptions.forEach(opt => {
+        opt.classList.add("disabled");
+        if (opt !== element && opt.querySelector(".symbol")) {
+          opt.querySelector(".symbol").classList.add("show");
+        }
+      });
+
+      // Mostrar explicación
+      if (isCorrect) {
+        explanationDiv.innerText = "✅ ¡Correcto! Un diagrama de árbol se utiliza para enumerar todos los caminos posibles en un experimento, especialmente en situaciones de probabilidad.";
+      } else {
+        explanationDiv.innerText = "❌ Incorrecto. La respuesta correcta es: 'Enumerar todos los caminos posibles de un experimento'. Los diagramas de árbol son útiles para visualizar todas las combinaciones posibles y calcular probabilidades.";
+      }
+      explanationDiv.style.display = "block";
+
+      // Mostrar botón siguiente
+      document.querySelector(".next-button").style.display = "block";
+    }
+  </script>
+</body>
+</html>
